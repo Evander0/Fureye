@@ -20,7 +20,7 @@ screen_height = 0
 
 
 def __init__():
-    global files, layer, screen_width, screen_height, path, conf, config, canvas
+    global files, layer, screen_width, screen_height, path, canvas
     config = Config("display", default)
     conf = config.read()
     path = conf["Path"]
@@ -75,7 +75,7 @@ def __init__():
 
 
 def load(name, size):
-    global files, layer, conf
+    global files, layer
     try:
         file = pathlib.Path(list(glob.glob(f'{path}/{name}.*'))[0])
     except IndexError:
