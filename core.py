@@ -19,7 +19,8 @@ files = os.listdir(path)
 
 config_file = 'config/main.json'
 default = {
-    "Disabled": []
+    "Disabled": [],
+    "debugging": False
 }
 
 
@@ -156,7 +157,7 @@ class log_handler:
         self.old_stm = sys.stdout
 
     def write(self, msg):
-        self.old_stm.write('\r'+msg)
+        self.old_stm.write('\r' + msg)
         logger(msg)
 
     def flush(self):
@@ -215,16 +216,22 @@ static["SYS_VER"] = os_version
 static["PY_VER"] = python_version
 static["running"] = {}
 disabled = []
+debugging = False
 try:
     with open(config_file, 'r') as f:
         conf = json.load(f)
     disabled = conf['Disabled']
+    debugging = conf['debugging']
 except Exception as e:
     print("模块管理器配置文件异常，正在重置")
     print("错误代码：" + str(e))
     data = json.dumps(default, indent=4)
     with open(config_file, 'w') as f:
         f.write("\n" + data)
+
+if debugging is True:
+    sys.stdout = raw_output
+    sys.stderr = err_output
 
 print(f"System: {os_info}")
 print(f"Python: {python_version}")

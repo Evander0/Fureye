@@ -19,15 +19,15 @@ def __init__():
 
     while not static["running"]["eye_display"]:
         continue
-    mdata = dynamic["eyes"]
+    mdata = dynamic["eyes"]["eyeball"]
     static["running"]["move_eye"] = True
-    dynamic['eyes'][0]["enabled"] = True
+    dynamic['eyes']["eyeball"]["enabled"] = True
     while static["running"]["move_eye"]:
         x = random.uniform(limit[0], limit[1])
         y = random.uniform(limit[0], limit[1])
         schedule = time.time() + random.uniform(wtime[0], wtime[1])
         while time.time() <= schedule:
-            mdata[0]["x"] += (x - mdata[0]["nx"]) / 20
-            mdata[0]["y"] += (y - mdata[0]["ny"]) / 20
+            mdata["x"] += (x - mdata["nx"]) / 20
+            mdata["y"] += (y - mdata["ny"]) / 20
             time.sleep(0.01)
     return
