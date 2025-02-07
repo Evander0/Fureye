@@ -135,6 +135,8 @@ class err_handler:
         self.old_stm = sys.stderr
 
     def write(self, msg):
+        global is_error
+        is_error = True
         if str(msg).startswith("Exception in thread"):
             logger(msg)
             self.thread_closed = True
