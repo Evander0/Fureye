@@ -63,7 +63,6 @@ def __init__():
                         canvas.moveto(j, screen_width, screen_height)
                 canvas.moveto(layer[i][dynamic['eyes'][i]["selected"]], x, y)
             else:
-                print(layer[i])
                 for j in layer[i]:
                     canvas.moveto(j, screen_width, screen_height)
         sleep(0.02)
