@@ -16,6 +16,7 @@ plugin_suffix = "py"
 path = os.path.join("module")
 sys.path.append(path)
 files = os.listdir(path)
+is_error = False
 
 config_file = 'config/main.json'
 default = {
@@ -85,10 +86,13 @@ def unload_module(t_name):
 
 def quit_all():
     try:
+        if not is_error:
+            log.close()
+            os.remove(log.name)
         tmp = threads.copy()
         for thread in tmp:
             unload_module(thread)
-    except:
+    except Exception:
         pass
 
 
@@ -118,12 +122,10 @@ def check_log():
 
 
 def logger(msg):
-    if msg == "\n":
-        log.write("\n")
-    elif msg not in ["", " ", "\r"]:
+    if msg not in ["", " ", "\r"]:
         msg.replace("\n", "")
-        log.write(msg)
-        log.flush()
+    log.write(msg)
+    log.flush()
 
 
 class err_handler:
@@ -167,15 +169,9 @@ class log_handler:
 def command_handler(command):
     match command[0]:
         case "quit":
-            try:
-                if command[1] in threads:
-                    unload_module(command[1])
-                else:
-                    print("未知模块")
-            except IndexError:
-                quit_all()
-                print("主程序终止")
-                quit()
+            quit_all()
+            print("主程序终止")
+            quit()
         case "list":
             match command[1]:
                 case "plugins":
