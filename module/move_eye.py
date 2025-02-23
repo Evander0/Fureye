@@ -23,19 +23,21 @@ def __init__():
 
     while not static["running"]["fureyev1"]:
         continue
-    mdata1 = dynamic["eyes"][0]["eyeball"]
-    mdata2 = dynamic["eyes"][1]["eyeball"]
+    config_t = Config("display")
+    conf_t = config_t.read()
+    num_display = conf_t["num_display"]
+    mdata = []
+    for i in range(num_display):
+        mdata.append(dynamic["eyes"][i]["eyeball"])
+        mdata[i]["enabled"] = True
     static["running"]["move_eye"] = True
-    mdata1["enabled"] = True
-    mdata2["enabled"] = True
     while static["running"]["move_eye"]:
         x = random.uniform(limit[0], limit[1])
         y = random.uniform(limit[0], limit[1])
         schedule = time.time() + random.uniform(wtime[0], wtime[1])
         while time.time() <= schedule:
-            mdata1["x"] += (x - mdata1["nx"]) / 20
-            mdata1["y"] += (y - mdata1["ny"]) / 20
-            mdata2["x"] += (x - mdata2["nx"]) / 20
-            mdata2["y"] += (y - mdata2["ny"]) / 20
+            for i in range(num_display):
+                mdata[i]["x"] += (x - mdata[i]["nx"]) / 20
+                mdata[i]["y"] += (y - mdata[i]["ny"]) / 20
             time.sleep(0.01)
     return
