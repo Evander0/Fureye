@@ -223,6 +223,7 @@ try:
 except Exception as e:
     print("模块管理器配置文件异常，正在重置")
     print("错误代码：" + str(e))
+    default.update(conf)
     data = json.dumps(default, indent=4)
     with open(config_file, 'w') as f:
         f.write("\n" + data)

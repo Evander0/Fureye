@@ -46,3 +46,12 @@ class Config:
             f.flush()
         with open(self.file, 'r') as f:
             self.conf = json.load(f)
+
+    def update(self):
+        with open(self.file, 'w') as f:
+            self.default.update(self.conf)
+            self.data = json.dumps(self.default, indent=4)
+            f.write("\n" + self.data)
+            f.flush()
+        with open(self.file, 'r') as f:
+            self.conf = json.load(f)

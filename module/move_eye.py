@@ -11,9 +11,15 @@ default = {
 
 def __init__():
     config = Config("display_pos", default)
-    conf = config.read()
-    limit = conf["Limit"]
-    wtime = conf["Time"]
+    try:
+        conf = config.read()
+        limit = conf["Limit"]
+        wtime = conf["Time"]
+    except KeyError:
+        config.update()
+        conf = config.read()
+        limit = conf["Limit"]
+        wtime = conf["Time"]
 
     while not static["running"]["fureyev1"]:
         continue

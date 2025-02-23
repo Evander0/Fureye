@@ -13,9 +13,7 @@ default = {
     "Layer": {
         "eyeball": 1
     },
-    "addon": {
-        None: []
-    }
+    "addon": {}
 }
 files: dict = {}
 layer: list = []
@@ -37,7 +35,7 @@ def __init__():
         addon = conf["addon"]
         num_display = conf["num_display"]
     except KeyError:
-        config.write(default)
+        config.update()
         conf = config.read()
         path = conf["Path"]
         file = conf["Layer"]
