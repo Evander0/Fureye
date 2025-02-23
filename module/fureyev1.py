@@ -108,10 +108,13 @@ def __init__():
 def load(name, size, on_display=-1, as_f=""):
     global files, layer
     try:
-        file = pathlib.Path(list(glob.glob(f'{path}/{name}.*'))[0])
+        file = pathlib.Path(list(glob.glob(fr'{path}/{name}'))[0])
     except IndexError:
-        print(f"File {name} not found")
-        return -1
+        try:
+            file = pathlib.Path(list(glob.glob(fr'{path}/{name}.*'))[0])
+        except IndexError:
+            print(f"File {name} not found")
+            return -1
     f_name = name
     if as_f != "":
         name = as_f
