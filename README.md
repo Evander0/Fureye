@@ -1,9 +1,9 @@
 # AFEDIUM
-*Advanced Fursuit of Electrical Device and Information Universal Manager*
+**Advanced Fursuit of Electrical Device and Information Universal Manager**
 <!--美国命名法，好玩-->
 
 ### 本项目旨在Linux下提供一个简单，快速部署，通用，多功能，高可靠性的电子眼显示和管理系统
-*不过你要是拿他做其他的事情我没也意见*
+~~不过你要是拿他做其他的事情我没也意见~~
 
 ----
 ## 部署说明:
