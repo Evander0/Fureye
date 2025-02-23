@@ -10,24 +10,26 @@ default = {
 
 
 def __init__():
-    global limit, wtime
-
     config = Config("display_pos", default)
     conf = config.read()
     limit = conf["Limit"]
     wtime = conf["Time"]
 
-    while not static["running"]["eye_display"]:
+    while not static["running"]["fureyev1"]:
         continue
-    mdata = dynamic["eyes"]["eyeball"]
+    mdata1 = dynamic["eyes"][0]["eyeball"]
+    mdata2 = dynamic["eyes"][1]["eyeball"]
     static["running"]["move_eye"] = True
-    dynamic['eyes']["eyeball"]["enabled"] = True
+    mdata1["enabled"] = True
+    mdata2["enabled"] = True
     while static["running"]["move_eye"]:
         x = random.uniform(limit[0], limit[1])
         y = random.uniform(limit[0], limit[1])
         schedule = time.time() + random.uniform(wtime[0], wtime[1])
         while time.time() <= schedule:
-            mdata["x"] += (x - mdata["nx"]) / 20
-            mdata["y"] += (y - mdata["ny"]) / 20
+            mdata1["x"] += (x - mdata1["nx"]) / 20
+            mdata1["y"] += (y - mdata1["ny"]) / 20
+            mdata2["x"] += (x - mdata2["nx"]) / 20
+            mdata2["y"] += (y - mdata2["ny"]) / 20
             time.sleep(0.01)
     return

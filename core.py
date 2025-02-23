@@ -20,7 +20,7 @@ is_error = False
 
 config_file = 'config/main.json'
 default = {
-    "Disabled": [],
+    "Disabled": ["fureye_old"],
     "debugging": False
 }
 
@@ -254,8 +254,10 @@ for name in plugins:
             continue
         load_module(name)
 
+print("Loaded:", threads)
 watchdog = threading.Thread(target=thread_watcher, name="watch_dog", daemon=True)
 watchdog.start()
+print("watch_dog started")
 comm.register("core", command_handler)
 while 1:
     try:
